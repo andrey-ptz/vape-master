@@ -2,12 +2,12 @@
 	<header class="header">
 		<div class="header__wrapper">
 			<div class="logo">
-				<a href="#" class="logo__link">
+				<nuxt-link to="/" exact class="logo__link">
 					<div class="logo__title">Vape Master</div>
 					<div class="logo__subtitle">Твой поставщик дыма</div>
-				</a>
+				</nuxt-link>
 			</div>
-			<Nav />
+			<navigation :links="links" />
 			<div class="user">
 				<div class="user__info">
 					<a class="user__link" href="#">
@@ -30,11 +30,23 @@
 </template>
 
 <script>
-import Nav from '~/components/Sections/Nav'
+import navigation from '~/components/Sections/Nav'
 
 export default {
 	components: {
-		Nav
+		navigation
+	},
+	data() {
+		return {
+			links: [
+				{ title: "Атомайзеры", url: "/atomizers" },
+				{ title: "Моды", url: "/mods" },
+				{ title: "Жидкости", url: "/a" },
+				{ title: "Аксессуары", url: "/b" },
+				{ title: "Аксессуары", url: "/c" },
+				{ title: "О нас", url: "/d" }
+			]
+		}
 	}
 }
 </script>
@@ -62,12 +74,14 @@ export default {
 	min-width: 210px
 	&__link
 		display: block
-		background: url("~assets/img/icons/logo.png") left 10px / 48px 67px no-repeat
+		background: url(~assets/img/icons/logo.png) left 10px / 48px 67px no-repeat
 		height: 70px
 		max-width: 250px
 		padding: 20px 0 0 63px
 		margin-left: -6px
 		+retina("~assets/img/icons/logo@2x.png")
+		&:hover
+			text-decoration: none
 	&__title
 		font-size: 16px
 		font-weight: 700

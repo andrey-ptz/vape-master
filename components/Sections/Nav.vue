@@ -6,24 +6,10 @@
       <span></span>
     </div>
     <ul class="nav__list">
-      <li class="nav__item nav__item_active">
-        <a class="nav__link" href="#">Атомайзеры</a>
-      </li>
-      <li class="nav__item">
-        <a class="nav__link" href="#">Моды</a>
-      </li>
-      <li class="nav__item">
-        <a class="nav__link" href="#">Жидкости</a>
-      </li>
-      <li class="nav__item">
-        <a class="nav__link" href="#">Аксессуары</a>
-      </li>
-      <li class="nav__item">
-        <a class="nav__link" href="#">Доставка</a>
-      </li>
-      <li class="nav__item">
-        <a class="nav__link" href="#">О нас</a>
-      </li>
+			<nuxt-link class="nav__item" active-class="nav__item_active" tag="li" 
+				:to="link.url" v-for="link in links" :key="link.title">
+				<a class="nav__link">{{ link.title }}</a>
+			</nuxt-link>
       <li class="nav__item nav__item_hidden">
         Еще
         <ul class="nav__hidden-list">
@@ -43,7 +29,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+	props: {
+		links: {
+			type: Array,
+			required: true
+		}
+	}
+};
 </script>
 
 <style lang="sass">
