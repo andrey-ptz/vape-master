@@ -13,7 +13,11 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+		],
+		script: [
+			{ src: "/js/nouislider.min.js", body: true },
+			{ src: "/js/scripts.js", body: true }
+		]
   },
   /*
   ** Customize the progress-bar color
