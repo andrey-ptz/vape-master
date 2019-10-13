@@ -1,7 +1,5 @@
-@import "utils/smart-grid"
-@import "utils/fonts"
-@import "utils/vars"
-@import "utils/bootstrap-reboot"
+@import "utils/_fonts"
+@import "bootstrap-reboot"
 
 *
 	font-family: 'Ubuntu', sans-serif
@@ -22,7 +20,7 @@ body
 	border-radius: 5px
 	padding: 8px 0 9px
 	cursor: pointer
-	transition: background-color .15s
+	transition: all .15s
 	&:active, &:focus
 		outline: none
 	&_apply
@@ -30,4 +28,16 @@ body
 		background-color: $blue
 		&:hover
 			background-color: $olive
+	&_more
+		width: 121px
+		border: 2px solid $olive
+		background-color: $block
+		color: $olive
+		letter-spacing: .5px
+		padding: 6px 0 7px
+		&:hover
+			border-color: $olive
+			background-color: $olive
+			color: $block
+			text-decoration: none
 		
