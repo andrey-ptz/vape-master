@@ -8,37 +8,41 @@
     </div>
     <div class="container">
       <aside>
-        <filters :params="filterParams" />
+        <Filters :params="filterParams" />
       </aside>
       <div class="main-container">
         <div class="sort">
           <div class="search">
             <input class="search__input" type="search" placeholder="Быстрый поиск" />
           </div>
-          <customSelect />
+          <CustomSelect />
         </div>
         <main>
-					<card 
+					<Card 
 						v-for="card in cards" 
 						:key="card.name"
 						:card="card"
 					/>
 				</main>
+				<button class="btn btn_load">Показать еще</button>
       </div>
+			<Footer />
     </div>
   </div>
 </template>
 
 <script>
-import filters from "~/components/Filters/Filters";
-import customSelect from "~/components/Sort/CustomSelect";
-import card from "~/components/Sections/Card";
+import Filters from "~/components/Filters/Filters";
+import CustomSelect from "~/components/Sort/CustomSelect";
+import Card from "~/components/Sections/Card";
+import Footer from "~/components/Sections/Footer";
 
 export default {
   components: {
-    filters,
-		customSelect,
-		card
+    Filters,
+		CustomSelect,
+		Card,
+		Footer
   },
   mounted: function() {
     accordionStart();
