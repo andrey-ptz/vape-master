@@ -44,8 +44,6 @@ export default {
 </script>
 
 <style lang="sass">
-@import "~/assets/sass/utils/vars"
-@import "~/assets/sass/utils/smart-grid"
 @import "~/assets/sass/nouislider"
 
 .filter
@@ -102,7 +100,7 @@ export default {
 		height: 7px
 		top: 22px
 		right: 19px
-		background: url(~assets/img/icons/arrow.svg) left top / 10px 7px no-repeat
+		background: url(~assets/icons/arrow.svg) left top / 10px 7px no-repeat
 	&_active
 		.accordion__arrow
 			transform: rotate(180deg)

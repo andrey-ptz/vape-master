@@ -31,8 +31,6 @@ export default {
 </script>
 
 <style lang="sass">
-@import "~/assets/sass/utils/vars"
-
 .checkboxes
 	&_row
 		display: flex
@@ -75,5 +73,5 @@ export default {
 			top: 4px
 			width: 11px
 			height: 9px
-			background: url(~assets/img/icons/switch.svg) left top / 11px 9px no-repeat
+			background: url(~assets/icons/switch.svg) left top / 11px 9px no-repeat
 </style>

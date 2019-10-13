@@ -40,10 +40,6 @@ export default {
 </script>
 
 <style lang="sass">
-@import "~/assets/sass/utils/vars"
-@import "~/assets/sass/utils/smart-grid"
-@import "~/assets/sass/mixins/retina"
-
 .nav
 	&__hamburger
 		display: none
@@ -89,7 +85,7 @@ export default {
 			cursor: pointer
 			&::after
 				content: ''
-				background: url(~assets/img/icons/arrow.svg) right top no-repeat
+				background: url(~assets/icons/arrow.svg) right top no-repeat
 				position: absolute
 				width: 10px
 				height: 7px

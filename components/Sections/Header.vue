@@ -11,7 +11,7 @@
 			<div class="user">
 				<div class="user__info">
 					<a class="user__link" href="#">
-						<img class="user__img" src="~assets/img/user.jpg" alt="Константин Константинов">
+						<img class="user__img" src="img/user.jpg" alt="Константин Константинов">
 					</a>
 					<div class="user__username">
 						<div class="user__name">Константин</div>
@@ -43,7 +43,7 @@ export default {
 				{ title: "Моды", url: "/mods" },
 				{ title: "Жидкости", url: "/a" },
 				{ title: "Аксессуары", url: "/b" },
-				{ title: "Аксессуары", url: "/c" },
+				{ title: "Доставка", url: "/c" },
 				{ title: "О нас", url: "/d" }
 			]
 		}
@@ -52,10 +52,6 @@ export default {
 </script>
 
 <style lang="sass">
-@import "~/assets/sass/utils/vars"
-@import "~/assets/sass/utils/smart-grid"
-@import "~/assets/sass/mixins/retina"
-
 .header
 	width: 100%
 	height: 70px
@@ -74,12 +70,12 @@ export default {
 	min-width: 210px
 	&__link
 		display: block
-		background: url(~assets/img/icons/logo.png) left 10px / 48px 67px no-repeat
+		background: url(~assets/icons/logo.png) left 10px / 48px 67px no-repeat
 		height: 70px
 		max-width: 250px
 		padding: 20px 0 0 63px
 		margin-left: -6px
-		+retina("~assets/img/icons/logo@2x.png")
+		+retina("~assets/icons/logo@2x.png")
 		&:hover
 			text-decoration: none
 	&__title
@@ -125,7 +121,7 @@ export default {
 	&__icon
 		width: 18px
 		height: 16px
-		background: url(~assets/img/icons/basket.svg) left top / 18px 16px no-repeat
+		background: url(~assets/icons/basket.svg) left top / 18px 16px no-repeat
 		margin: 6px 0 0 3px
 		display: block
 </style>

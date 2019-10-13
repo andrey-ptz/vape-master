@@ -33,8 +33,6 @@ export default {
 </script>
 
 <style lang="sass">
-@import "~/assets/sass/utils/vars"
-
 .range
 	&__inputs
 		margin-top: 13px

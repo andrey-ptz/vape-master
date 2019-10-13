@@ -42,8 +42,14 @@ export default {
   /*
   ** Nuxt.js modules
   */
-  modules: [
-  ],
+	modules: ['@nuxtjs/style-resources'],
+	styleResources: {
+		sass: [
+			'~assets/sass/utils/_vars.sass',
+			'~assets/sass/mixins/_smart-grid.sass',
+			'~assets/sass/mixins/_retina.sass'
+		]
+	},
   /*
   ** Build configuration
   */
