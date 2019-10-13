@@ -7,7 +7,7 @@
 					<div class="logo__subtitle">Твой поставщик дыма</div>
 				</nuxt-link>
 			</div>
-			<navigation :links="links" />
+			<Nav :links="links" />
 			<div class="user">
 				<div class="user__info">
 					<a class="user__link" href="#">
@@ -30,11 +30,11 @@
 </template>
 
 <script>
-import navigation from '~/components/Sections/Nav'
+import Nav from '~/components/Sections/Nav'
 
 export default {
 	components: {
-		navigation
+		Nav
 	},
 	data() {
 		return {

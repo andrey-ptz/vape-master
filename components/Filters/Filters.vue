@@ -6,11 +6,11 @@
 				<div class="accordion__title">{{ param.title }}</div>
 				<span class="accordion__arrow"></span>
 			</div>
-			<checkboxFilter
+			<CheckboxFilter
 				v-if="param.type === 'checkbox'"
 				:values="param.values" 
 				:direction="param.direction"/>
-			<rangeFilter
+			<RangeFilter
 				v-else-if="param.type === 'range'"
 				:values="param.values"/>
 		</div>
@@ -23,13 +23,13 @@
 </template>
 
 <script>
-import checkboxFilter from "~/components/Filters/CheckboxFilter";
-import rangeFilter from "~/components/Filters/RangeFilter";
+import CheckboxFilter from "~/components/Filters/CheckboxFilter";
+import RangeFilter from "~/components/Filters/RangeFilter";
 
 export default {
   components: {
-		checkboxFilter,
-		rangeFilter
+		CheckboxFilter,
+		RangeFilter
 	},
 	props: {
 		params: {
