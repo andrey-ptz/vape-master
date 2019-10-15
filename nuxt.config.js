@@ -1,3 +1,4 @@
+const sortCSSmq = require('sort-css-media-queries');
 
 export default {
   mode: 'universal',
@@ -12,8 +13,12 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+      { rel: 'icon', type: 'image/png', sizes: '32x32', href: 'favicon-32x32.png' }
+		],
+		script: [
+			{ src: "/js/nouislider.min.js", body: true },
+			{ src: "/js/scripts.js", body: true }
+		]
   },
   /*
   ** Customize the progress-bar color
@@ -23,11 +28,13 @@ export default {
   ** Global CSS
   */
   css: [
+		{ src: '~/assets/sass/main.sass', lang: 'sass'}
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+		'~/plugins/bus'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -37,16 +44,31 @@ export default {
   /*
   ** Nuxt.js modules
   */
-  modules: [
-  ],
+	modules: ['@nuxtjs/style-resources'],
+	styleResources: {
+		sass: [
+			'~assets/sass/utils/_vars.sass',
+			'~assets/sass/mixins/_smart-grid.sass',
+			'~assets/sass/mixins/_retina.sass'
+		]
+	},
   /*
   ** Build configuration
   */
+ 
   build: {
+		postcss: {
+			plugins: {
+				'css-mqpacker': { 
+					sort: sortCSSmq 
+				}
+			}
+		},
     /*
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+			
     }
   }
 }

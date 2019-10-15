@@ -1,0 +1,54 @@
+@import "utils/_fonts"
+@import "bootstrap-reboot"
+
+*
+	font-family: 'Ubuntu', sans-serif
+
+body
+	background-color: $body
+	color: $main
+	line-height: 1.15
+
+.btn
+	text-align: center
+	border: none
+	outline: none
+	color: $block
+	font-size: 12px
+	font-weight: 700
+	text-transform: uppercase
+	border-radius: 5px
+	padding: 8px 0 9px
+	cursor: pointer
+	transition: all .15s
+	&:active, &:focus
+		outline: none
+	&_apply
+		width: 141px
+		background-color: $blue
+		&:hover
+			background-color: $olive
+	&_more
+		width: 121px
+		border: 2px solid $olive
+		background-color: $block
+		color: $olive
+		letter-spacing: .5px
+		padding: 6px 0 7px
+		&:hover
+			border-color: $olive
+			background-color: $olive
+			color: $block
+			text-decoration: none
+	&_load
+		width: 100%
+		font-size: 16px
+		margin-top: 1px
+		padding: 16px 0 17px
+		border: 1px solid $border
+		box-shadow: $shadow
+		border-radius: 4px
+		background-color: $block
+		color: $blue
+		letter-spacing: .8px
+		
