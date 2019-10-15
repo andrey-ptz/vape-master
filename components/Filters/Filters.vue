@@ -1,25 +1,25 @@
 <template>
-  <div class="filter">
+  <aside ref="aside">
+    <div class="filter">
+      <div v-for="param in params" :key="param.title">
+        <div class="accordion accordion_active">
+          <div class="accordion__title">{{ param.title }}</div>
+          <span class="accordion__arrow"></span>
+        </div>
+        <CheckboxFilter
+          v-if="param.type === 'checkbox'"
+          :values="param.values"
+          :direction="param.direction"
+        />
+        <RangeFilter v-else-if="param.type === 'range'" :values="param.values" />
+      </div>
 
-		<div v-for="param in params" :key="param.title">
-			<div class="accordion accordion_active">
-				<div class="accordion__title">{{ param.title }}</div>
-				<span class="accordion__arrow"></span>
-			</div>
-			<CheckboxFilter
-				v-if="param.type === 'checkbox'"
-				:values="param.values" 
-				:direction="param.direction"/>
-			<RangeFilter
-				v-else-if="param.type === 'range'"
-				:values="param.values"/>
-		</div>
-
-    <div class="filter__buttons">
-      <button class="btn btn_apply">Применить</button>
-      <button class="filter__reset">Сбросить</button>
+      <div class="filter__buttons">
+        <button class="btn btn_apply">Применить</button>
+        <button class="filter__reset">Сбросить</button>
+      </div>
     </div>
-  </div>
+  </aside>
 </template>
 
 <script>
@@ -28,23 +28,39 @@ import RangeFilter from "~/components/Filters/RangeFilter";
 
 export default {
   components: {
-		CheckboxFilter,
-		RangeFilter
-	},
-	props: {
-		params: {
-			type: Array,
-			required: true
-		}
-	},
+    CheckboxFilter,
+    RangeFilter
+  },
+  props: {
+    params: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
-    return {}
+    return {};
+  },
+  mounted() {
+    this.$bus.$on("showHiddenFilter", status => {
+      status
+        ? this.$refs.aside.classList.add("active")
+        : this.$refs.aside.classList.remove("active");
+    });
   }
 };
 </script>
 
 <style lang="sass">
 @import "~/assets/sass/nouislider"
+
+aside
+	+col()
+	+size(3)
+	+size-lg(4)
+	+size-md(12)
+	+md(display, none)
+	&.active
+		display: block
 
 .filter
 	margin-bottom: 40px

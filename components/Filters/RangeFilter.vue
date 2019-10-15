@@ -1,11 +1,16 @@
 <template>
   <div class="filter__wrapper">
     <div class="range">
-
       <div class="range__inputs">
         <div class="range__from">
           <label class="range__label">От</label>
-          <input class="range__input" type="text" name="rangeFrom" maxlength="10" :value="values[0]" />
+          <input
+            class="range__input"
+            type="text"
+            name="rangeFrom"
+            maxlength="10"
+            :value="values[0]"
+          />
         </div>
         <div class="range__to">
           <label class="range__label">До</label>
@@ -16,19 +21,18 @@
       <div class="range__container">
         <div class="range__custom"></div>
       </div>
-
     </div>
   </div>
 </template>
 
 <script>
 export default {
-	props: {
-		values: {
-			type: Array,
-			required: true
-		}
-	},
+  props: {
+    values: {
+      type: Array,
+      required: true
+    }
+  }
 };
 </script>
 
@@ -67,6 +71,8 @@ export default {
 		&:focus
 			border: 1px solid $main
 			outline: none
+		&::-ms-clear
+			display: none
 	&__container
 		height: 28px
 		margin: 16px 0 2px

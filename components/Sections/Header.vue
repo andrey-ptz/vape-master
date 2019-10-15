@@ -41,10 +41,10 @@ export default {
 			links: [
 				{ title: "Атомайзеры", url: "/atomizers" },
 				{ title: "Моды", url: "/mods" },
-				{ title: "Жидкости", url: "/a" },
-				{ title: "Аксессуары", url: "/b" },
-				{ title: "Доставка", url: "/c" },
-				{ title: "О нас", url: "/d" }
+				{ title: "Жидкости", url: "/eliquid" },
+				{ title: "Аксессуары", url: "/accessories" },
+				{ title: "Доставка", url: "/delivery" },
+				{ title: "О нас", url: "/about" }
 			]
 		}
 	}
@@ -68,6 +68,10 @@ export default {
 
 .logo
 	min-width: 210px
+	+sm-block
+		flex-grow: 1
+		min-width: 0
+	+xs(min-width, 0)
 	&__link
 		display: block
 		background: url(~assets/icons/logo.png) left 10px / 48px 67px no-repeat
@@ -76,6 +80,8 @@ export default {
 		padding: 20px 0 0 63px
 		margin-left: -6px
 		+retina("~assets/icons/logo@2x.png")
+		+sm(max-width, 210px)
+		+xs(max-width, 63px)
 		&:hover
 			text-decoration: none
 	&__title
@@ -84,15 +90,18 @@ export default {
 		text-transform: uppercase
 		color: $olive
 		letter-spacing: 0.4px
+		+xs(display, none)
 	&__subtitle
 		font-size: 12px
 		color: $grey
 		margin: -1px 0 0 2px
+		+xs(display, none)
 
 .user
 	display: flex
 	justify-content: space-between
 	min-width: 180px
+	+lg(min-width, 0)
 	&__info
 		display: flex
 	&__link
@@ -103,6 +112,7 @@ export default {
 	&__username
 		margin: 12px 0 0 10px
 		font-size: 12px
+		+lg(display, none)
 	&__name
 		line-height: 2.5
 	&__surname

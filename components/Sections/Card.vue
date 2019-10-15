@@ -75,9 +75,14 @@ export default {
 </script>
 
 <style lang="sass">
+@import "~/assets/sass/mixins/_fluid-font-size"
+
 .card
 	+col()
 	+size(4)
+	+size-lg(6)
+	+size-md(6)
+	+size-xs(12)
 	min-width: 262px
 	display: flex
 	flex-direction: column
@@ -101,10 +106,18 @@ export default {
 		margin-bottom: 9px
 		line-height: 1.2
 		overflow: hidden
+		+md-block()
+			+fluidFontSize(20px, 24px, 611px, 900px)
+		+xs-block()
+			+fluidFontSize(20px, 26px, 320px, 610px)
 	&__table
 		width: 100%
 		border-collapse: separate
 		border-spacing: 2px
+		+md-block()
+			+fluidFontSize(12px, 16px, 611px, 900px)
+		+xs-block()
+			+fluidFontSize(12px, 18px, 320px, 610px)
 		td
 			padding: 1px 0 2px
 			width: 50%
@@ -121,4 +134,8 @@ export default {
 		font-weight: 500
 		margin: -2px 0 0 11px
 		color: $main
+		+md-block()
+			+fluidFontSize(16px, 18px, 611px, 900px)
+		+xs-block()
+			+fluidFontSize(16px, 18px, 320px, 610px)
 </style>

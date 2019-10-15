@@ -2,18 +2,18 @@
   <div class="select">
     <label class="select__label">Сортировать</label>
     <div class="select__wrapper">
-
-      <div class="select__custom" 
-				@click="optionsHide = !optionsHide">
+      <div class="select__custom" @click="optionsHide = !optionsHide">
         {{ options.active }}
         <div class="select__arrow" :class="{'select__arrow_active': optionsHide}"></div>
       </div>
       <div class="select__options" :class="{'select__options_active': optionsHide}">
-        <div class="select__option"
-					v-for="value in options.values" 
-					:key="value"
-					:class="{'select__option_selected': value === options.active}"
-					@click="optionClick">{{ value }}</div>
+        <div
+          class="select__option"
+          v-for="value in options.values"
+          :key="value"
+          :class="{'select__option_selected': value === options.active}"
+          @click="optionClick"
+        >{{ value }}</div>
       </div>
     </div>
   </div>
@@ -21,48 +21,47 @@
 
 <script>
 export default {
-	data() {
-		return {
-			optionsHide: false,
-			options: {
-				values: ['по названию', 'по диаметру', 'по цене'],
-				active: 'по названию'
+  data() {
+    return {
+      optionsHide: false,
+      options: {
+        values: ["по названию", "по диаметру", "по цене"],
+        active: "по названию"
+      }
+    };
+  },
+  mounted() {
+    this.$bus.$on("documentClick", e => {
+      if (!e.target.matches(".select__custom")) {
+        this.optionsHide = false;
+      }
+    });
+  },
+  methods: {
+    optionClick(e) {
+			const options = document.querySelectorAll(".select__option");
+			for (let i = 0; i < options.length; i++) {
+				options[i].classList.remove("select__option_selected");
 			}
-		}
-	},
-	methods:{
-		optionClick(e) {
-			document.querySelectorAll('.select__option').forEach(el => {
-				el.classList.remove('select__option_selected')
-			})
-			e.target.classList.add('select__option_selected')
-			this.options.active = e.target.innerHTML.trim()
-		},
-		documentClick(e){
-			if (!e.target.matches('.select__custom')) {
-				this.optionsHide = false
-			}
-		}
-	},
-	mounted () {
-    document.addEventListener('click', this.documentClick)
-	},
-	destroyed () {
-    document.removeEventListener('click', this.documentClick)
+      e.target.classList.add("select__option_selected");
+      this.options.active = e.target.innerHTML.trim();
+    }
   }
-}
+};
 </script>
 
 <style lang="sass">
 .select
 	display: flex
 	align-items: center
+	+xs(margin-top, 15px)
 	&__label
 		font-size: 12px
 		margin: 0 10px 1px 0
 	&__wrapper
 		position: relative
 		font-size: 12px
+		+xs(width, 100%)
 	&__custom
 		width: 122px
 		height: 28px
@@ -71,6 +70,7 @@ export default {
 		padding: 5px 8px
 		cursor: pointer
 		line-height: 15px
+		+xs(width, auto)
 	&__arrow
 		background: url(~assets/icons/arrow.svg) right top no-repeat
 		position: absolute

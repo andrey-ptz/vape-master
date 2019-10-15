@@ -30,7 +30,7 @@ export default {};
 <style lang="sass">
 .footer
 	width: 100%
-	margin: 35px 0
+	margin: 50px 0
 	padding: 0 15px
 	display: flex
 	justify-content: space-between
@@ -44,15 +44,23 @@ export default {};
 		height: 35px
 		background: url(~assets/icons/footerLogo.png) left top / 24px 33px no-repeat
 		+retina("~assets/icons/footerLogo@2x.png")
+		+to(1024px)
+			margin-left: 0
+		+xs(min-width, 40%)
 	&__info
 		margin-top: 4px
+		+md(max-width, 220px)
+		+xs-block()
+			order: -1
+			min-width: 100%
+			margin-bottom: 20px
 		&-link
 			display: inline-block
 			color: $main
 			font-weight: 700
 			margin-right: 24px
 			margin-bottom: 5px
-			border-bottom: 1px solid $border
+			border-bottom: 1px solid $footer-border
 			&:last-child
 				margin-right: 0
 			&:hover
@@ -62,33 +70,42 @@ export default {};
 	&__more
 		display: flex
 		margin-right: 10px
+		+to(1024px)
+			margin-right: 0
 	&__social
 		margin-top: 5px
 		display: flex
+		+sm(flex-direction, column)
+		+xs(flex-direction, row)
 		&-link
 			width: 30px
 			height: 30px
 			border-radius: 50%
 			margin-bottom: 3px
-			&:last-child
-				margin-left: 5px
 			&_vk
-				background: $main url(~assets/icons/vk.png) center center no-repeat
+				margin-right: 5px
+				background: $main url(~assets/icons/vk.png) center center / 20px 12px no-repeat
 				+retina("~assets/icons/vk@2x.png")
 			&_fb
-				background: $main url(~assets/icons/fb.png) center center no-repeat
+				background: $main url(~assets/icons/fb.png) 11px bottom / 12px 22px no-repeat
 				+retina("~assets/icons/fb@2x.png")
 	&__about
 		margin-left: 14px
 		line-height: 1
 		max-width: 125px
 		min-width: 65px
+		+to(1024px)
+			max-width: 65px
+		+sm(margin-left, 7px)
+		+xs-block()
+			max-width: 125px
+			margin-left: 14px
 		&-link
 			display: inline-block
 			color: $main
 			font-size: 12px
 			margin-right: 5px
-			border-bottom: 1px solid $border
+			border-bottom: 1px solid $footer-border
 			&:hover
 				border-color: $body
 				color: $main
