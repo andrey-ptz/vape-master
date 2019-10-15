@@ -1,3 +1,4 @@
+const sortCSSmq = require('sort-css-media-queries');
 
 export default {
   mode: 'universal',
@@ -56,7 +57,13 @@ export default {
   */
  
   build: {
-	},
+		postcss: {
+			plugins: {
+				'css-mqpacker': { 
+					sort: sortCSSmq 
+				}
+			}
+		},
     /*
     ** You can extend webpack config here
     */
