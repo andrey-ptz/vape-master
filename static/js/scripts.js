@@ -1,4 +1,13 @@
-const rangeStart = () => {
+"use strict";
+
+if (!Element.prototype.matches) {
+	Element.prototype.matches = Element.prototype.matchesSelector
+		|| Element.prototype.webkitMatchesSelector
+		|| Element.prototype.mozMatchesSelector
+		|| Element.prototype.msMatchesSelector;
+}
+
+const rangeStart = function rangeStart() {
 
 	const range = document.querySelector('.range__custom'),
 				rangeFrom = document.querySelectorAll('.range__input')[0],
@@ -27,21 +36,21 @@ const rangeStart = () => {
 	});
 
 	rangeFrom.addEventListener('change', function () {
-		range.noUiSlider.set([Math.trunc(this.value), null]);
+		range.noUiSlider.set([this.value, null]);
 	});
 
 	rangeTo.addEventListener('change', function () {
-		range.noUiSlider.set([null, Math.trunc(this.value)]);
+		range.noUiSlider.set([null, this.value]);
 	});
 }
 
-const showPanel = el => {
+const showPanel = function showPanel(el) {
 	const panel = el.nextElementSibling;
 	panel.style.maxHeight = panel.scrollHeight + "px";
 	panel.classList.add("filter__wrapper_active");
 }
 
-const accordionStart = () => {
+const accordionStart = function accordionStart() {
 
 	const acc = document.querySelectorAll(".accordion"),
 				aside = document.querySelector("aside");
