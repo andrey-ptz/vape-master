@@ -44,7 +44,10 @@ export default {
   /*
   ** Nuxt.js modules
   */
-	modules: ['@nuxtjs/style-resources'],
+	modules: [
+		'@nuxtjs/style-resources',
+		'@nuxtjs/axios'
+	],
 	styleResources: {
 		sass: [
 			'~assets/sass/utils/_vars.sass',
@@ -52,6 +55,9 @@ export default {
 			'~assets/sass/mixins/_retina.sass'
 		]
 	},
+	axios: {
+    proxyHeaders: false
+  },
   /*
   ** Build configuration
   */
@@ -70,5 +76,8 @@ export default {
     extend (config, ctx) {
 			
     }
-  }
+	},
+	env: {
+		baseUrl: process.env.BASE_URL || 'https://vape-e7da1.firebaseio.com'
+	}
 }
