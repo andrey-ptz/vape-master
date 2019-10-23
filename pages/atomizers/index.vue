@@ -23,13 +23,19 @@
 					</div>
 					<main>
 						<Card 
-							v-for="card in itemList" 
-							:key="card.name"
-							:card="card"
+							v-for="(value, i) in items" 
+							:key="i"
+							:card="value"
 							:pageName="pageName"
 						/>
 					</main>
-					<button class="btn btn_load">Показать еще</button>
+					<button 
+						class="btn btn_load" 
+						v-if="itemList.length > currentSize"
+						@click="loadMore"
+					>
+						Показать еще
+					</button>
 				</div>
 				<Footer />
 			</div>
@@ -55,19 +61,30 @@ export default {
 	data() {
     return {
 			pageName: 'atomizers',
-			hiddenFilter: false
+			hiddenFilter: false,
+			defaultSize: 6,
+			currentSize: 6,
+			loadMoreSize: 6
     }
   },
 	computed: {
 		// call getter with page name param and get cards list
 		itemList() {
       return this.$store.getters.itemList(this.pageName);
-    }
+		},
+		// show only currentSize cards
+		items() {
+			return this.itemList.slice(0, this.currentSize);
+		}
 	},
 	methods: {
 		showHiddenFilter() {
 			this.hiddenFilter = !this.hiddenFilter
 			this.$bus.$emit('showHiddenFilter', this.hiddenFilter)
+		},
+		// show more cards when load more button clicked
+		loadMore() {
+			this.currentSize += this.loadMoreSize
 		}
 	},
   mounted() {
