@@ -17,7 +17,7 @@ export default {
 		],
 		script: [
 			{ src: "/js/nouislider.min.js", body: true },
-			{ src: "/js/scripts.js", body: true }
+			{ src: "/js/polyfills.js", body: true }
 		]
   },
   /*
