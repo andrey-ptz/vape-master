@@ -29,9 +29,23 @@ export default {
 		}
 	},
 	itemList(state) {
-		// get page name and return cards list
+		// get page name and return card list
+		// which matches filter parameters from store
 		return name => {
-			return state[name].itemList
+			let tempState = state[name].itemList,
+					filteredState;
+
+			state[name].filterParams.forEach((p) => {
+				if (p.activeValues.length) {
+					filteredState = tempState.filter((item) => {
+						return p.type === 'checkbox'
+							? p.activeValues.includes(item[p.name])
+							: item[p.name] >= p.activeValues[0] && item[p.name] <= p.activeValues[1]
+					})
+					tempState = filteredState
+				}
+			})
+			return tempState
 		}
 	}
 }
