@@ -13,7 +13,7 @@
 				</div>
 			</div>
 			<div class="container">
-				<Filters :params="filterParams" />
+				<Filters :pageName="pageName" />
 				<div class="main-container">
 					<div class="sort">
 						<div class="search">
@@ -23,9 +23,10 @@
 					</div>
 					<main>
 						<Card 
-							v-for="card in cards" 
+							v-for="card in itemList" 
 							:key="card.name"
 							:card="card"
+							:pageName="pageName"
 						/>
 					</main>
 					<button class="btn btn_load">Показать еще</button>
@@ -51,6 +52,18 @@ export default {
 		Card,
 		Footer
 	},
+	data() {
+    return {
+			pageName: 'atomizers',
+			hiddenFilter: false
+    }
+  },
+	computed: {
+		// call getter with page name param and get cards list
+		itemList() {
+      return this.$store.getters.itemList(this.pageName);
+    }
+	},
 	methods: {
 		showHiddenFilter() {
 			this.hiddenFilter = !this.hiddenFilter
@@ -63,11 +76,6 @@ export default {
 	},
 	beforeDestroy() {
 		this.$bus.$off('showHiddenFilter')
-  },
-  data() {
-    return {
-			hiddenFilter: false
-    };
   }
 };
 </script>

@@ -25,29 +25,24 @@
 <script>
 export default {
   props: {
+		pageName: {
+      type: String,
+      required: true
+    },
     card: {
       type: Object,
       required: true
     }
   },
-  data() {
-    return {
-      params: {
-        atomizers: {
-          volume: "Объем (мл)",
-          diameter: "Диаметр (мм)",
-          original: "Оригинал",
-          stock: "Наличие",
-          airflow: "Обдув",
-          brand: "Производитель"
-        }
-      }
-    };
-  },
   computed: {
+		// call getter with page name param and get card parameters
+		itemParams() {
+			return this.$store.getters.itemParams(this.pageName);
+		},
+		// change some default card parameters
     cardParams() {
 			let key, value, cardParams = [];
-      for (key in this.params.atomizers) {
+      for (key in this.itemParams) {
 				
 				switch (key) {
           case 'original':
@@ -64,7 +59,7 @@ export default {
         }
 
         cardParams.push({
-          name: this.params.atomizers[key],
+          name: this.itemParams[key],
           value
         });
       }

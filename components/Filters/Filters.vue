@@ -1,7 +1,7 @@
 <template>
   <aside ref="aside">
     <div class="filter">
-      <div v-for="param in params" :key="param.title">
+      <div v-for="param in filterParams" :key="param.title">
         <div class="accordion accordion_active">
           <div class="accordion__title">{{ param.title }}</div>
           <span class="accordion__arrow"></span>
@@ -32,13 +32,16 @@ export default {
     RangeFilter
   },
   props: {
-    params: {
-      type: Array,
+    pageName: {
+      type: String,
       required: true
     }
   },
-  data() {
-    return {};
+	computed: {
+		// call getter with page name param and get filter parameters
+    filterParams() {
+			return this.$store.getters.filterParams(this.pageName);
+    }
   },
   mounted() {
     this.$bus.$on("showHiddenFilter", status => {
