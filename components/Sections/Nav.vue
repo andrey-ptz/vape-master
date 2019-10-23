@@ -9,8 +9,13 @@
       <span></span>
     </div>
     <ul class="nav__list" ref="list">
-			<nuxt-link class="nav__item" active-class="nav__item_active" tag="li" 
-				:to="value.url" v-for="(value, index) in links" :key="index">
+			<nuxt-link class="nav__item" active-class="nav__item_active" 
+				tag="li" 
+				:to="value.url" 
+				v-for="(value, index) in links" 
+				:key="index"
+				@click.native="clearPage"
+			>
 				<a class="nav__link">{{ value.title }}</a>
 			</nuxt-link>
       <li class="nav__item nav__item-hidden"
@@ -20,8 +25,13 @@
         Еще
         <ul class="nav__hidden-list" :class="{'nav__hidden-list_active': hiddenMenu}">
 					
-					<nuxt-link class="nav__hidden-item" active-class="nav__hidden-item_active" tag="li" 
-						:to="value.url" v-for="(value, index) in hiddenLinks" :key="index">
+					<nuxt-link class="nav__hidden-item" active-class="nav__hidden-item_active" 
+						tag="li" 
+						:to="value.url" 
+						v-for="(value, index) in hiddenLinks" 
+						:key="index"
+						@click.native="clearPage"
+					>
 						<a class="nav__hidden-link">{{ value.title }}</a>
           </nuxt-link>
 
@@ -39,6 +49,34 @@ export default {
 			required: true
 		}
 	},
+	data() {
+		return {
+			hiddenMenu: false,
+			hamburgerActive: false
+		}
+	},
+	methods:{
+		mobileMenu() {
+			this.hamburgerActive = !this.hamburgerActive
+			const list = this.$refs.list, 
+						move = this.$parent.$parent.$refs.move;
+			
+			if (list.style.maxHeight) {
+				list.removeAttribute("style"), move.removeAttribute("style");
+			} else {
+				list.style.maxHeight = list.scrollHeight + "px";
+				move.style.height = list.scrollHeight + "px";
+			}
+		},
+		clearPage() {
+			this.$bus.$emit('clearPage')
+		}
+	},
+	computed: {
+		hiddenLinks() {
+			return this.links.slice(3);
+		}
+	},
 	mounted() {
 		this.$bus.$on('documentClick', (e) => {
 			if (!e.target.matches('.nav__item-hidden')) {
@@ -54,34 +92,9 @@ export default {
 			}
 		})
 	},
-	data() {
-		return {
-			hiddenMenu: false,
-			hamburgerActive: false
-		}
-	},
 	beforeDestroy() {
 		this.$bus.$off('documentClick')
 		this.$bus.$off('windowResize')
-	},
-	methods:{
-		mobileMenu() {
-			this.hamburgerActive = !this.hamburgerActive
-			const list = this.$refs.list, 
-						move = this.$parent.$parent.$refs.move;
-			
-			if (list.style.maxHeight) {
-				list.removeAttribute("style"), move.removeAttribute("style");
-			} else {
-				list.style.maxHeight = list.scrollHeight + "px";
-				move.style.height = list.scrollHeight + "px";
-			}
-		},
-	},
-	computed: {
-		hiddenLinks() {
-			return this.links.slice(3);
-		}
 	}
 };
 </script>

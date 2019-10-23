@@ -52,11 +52,19 @@ export default {
 			this.$router.push({ query: { ...this.$route.query, [this.filterName]: arr } });
 		}
 	},
+	mounted() {
+		this.$bus.$on('clearPage', () => {
+			this.checkboxValues = [];
+		})
+	},
 	filters: {
     replaceBoolean(value) {
       return value === true ? 'Да' : ( value === false ? 'Нет' : value )
 		}
-	}
+	},
+	beforeDestroy() {
+    this.$bus.$off("clearPage");
+  }
 };
 </script>
 

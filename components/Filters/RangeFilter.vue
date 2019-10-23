@@ -55,6 +55,12 @@ export default {
 		}
 	},
 	mounted() {
+		this.$bus.$on('clearPage', () => {
+			this.minVal = this.values[0];
+			this.maxVal = this.values[1];
+			this.$refs.slider.noUiSlider.set([this.minVal, this.maxVal]);
+		})
+
 		if (this.activeValues.length) {
 			this.minVal = this.activeValues[0];
 			this.maxVal = this.activeValues[1];
@@ -85,6 +91,9 @@ export default {
 			});
     }
 	},
+	beforeDestroy() {
+    this.$bus.$off("clearPage");
+  }
 };
 </script>
 

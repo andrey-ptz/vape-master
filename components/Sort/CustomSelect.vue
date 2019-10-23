@@ -38,11 +38,17 @@ export default {
 	},
   mounted() {
 		this.loadOptions();
+
     this.$bus.$on("documentClick", e => {
       if (!e.target.matches(".select__custom")) {
         this.optionsHide = false;
       }
-    });
+		});
+
+		this.$bus.$on('clearPage', () => {
+			this.indexActiveOption = 0;
+			this.valueActiveOption = this.optionsList[0].name
+		});
   },
   methods: {
 		loadOptions() {
@@ -58,6 +64,9 @@ export default {
 				query: { ...this.$route.query, 'orderBy': this.optionsList[index].value } 
 			});
     }
+	},
+	beforeDestroy() {
+    this.$bus.$off("clearPage");
   }
 };
 </script>

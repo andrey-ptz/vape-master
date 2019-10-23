@@ -101,12 +101,18 @@ export default {
     }
   },
   mounted() {
-
+		this.$bus.$on('clearPage', () => {
+			this.currentSize = this.defaultSize;
+			this.searchValue = '';
+		})
 	},
 	validate ({ params, query, store }) {
 		store.dispatch('filterValues', { query, name: 'atomizers' });
 		return true
-	}
+	},
+	beforeDestroy() {
+    this.$bus.$off("clearPage");
+  }
 };
 </script>
 
