@@ -1,22 +1,30 @@
 <template>
   <aside ref="aside">
     <div class="filter">
-      <div v-for="param in filterParams" :key="param.title">
-        <div class="accordion accordion_active">
+      <div v-for="(param, i) in filterParams" :key="param.name">
+        
+				<div class="accordion accordion_active"
+					:class="{'accordion_last': i === filterParams.length - 1}"
+					@click="accordion"
+				>
           <div class="accordion__title">{{ param.title }}</div>
           <span class="accordion__arrow"></span>
         </div>
+
         <CheckboxFilter
           v-if="param.type === 'checkbox'"
+					:filterName="param.name"
           :values="param.values"
+					:activeValues="param.activeValues"
           :direction="param.direction"
         />
-        <RangeFilter v-else-if="param.type === 'range'" :values="param.values" />
-      </div>
 
-      <div class="filter__buttons">
-        <button class="btn btn_apply">Применить</button>
-        <button class="filter__reset">Сбросить</button>
+        <RangeFilter 
+					v-else-if="param.type === 'range'" 
+					:filterName="param.name" 
+					:values="param.values"
+					:activeValues="param.activeValues"
+				/>
       </div>
     </div>
   </aside>
@@ -37,10 +45,10 @@ export default {
       required: true
     }
   },
-	computed: {
-		// call getter with page name param and get filter parameters
+  computed: {
+    // call getter with page name param and get filter parameters
     filterParams() {
-			return this.$store.getters.filterParams(this.pageName);
+      return this.$store.getters.filterParams(this.pageName);
     }
   },
   mounted() {
@@ -49,6 +57,31 @@ export default {
         ? this.$refs.aside.classList.add("active")
         : this.$refs.aside.classList.remove("active");
     });
+
+    let asideDisplay = getComputedStyle(this.$refs.aside).display;
+    document.querySelectorAll(".accordion").forEach((el, i, arr) => {
+      if (el.classList.contains("accordion_active") && asideDisplay != "none") {
+        const panel = el.nextElementSibling;
+        panel.style.maxHeight = panel.scrollHeight + "px";
+        i === arr.length - 1 ? panel.classList.add("filter__wrapper_last") : "";
+      }
+    });
+  },
+  methods: {
+    accordion(e) {
+      e.currentTarget.classList.toggle("accordion_active");
+      const panel = e.currentTarget.nextElementSibling;
+      if (parseInt(panel.style.maxHeight) !== 0) {
+        panel.style.maxHeight = 0;
+        panel.classList.remove("filter__wrapper_active");
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+        panel.classList.add("filter__wrapper_active");
+      }
+    }
+  },
+  beforeDestroy() {
+    this.$bus.$off("showHiddenFilter");
   }
 };
 </script>
@@ -76,29 +109,12 @@ aside
 		padding: 0 18px
 		background-color: $panel
 		overflow: hidden
+		border-bottom: none
 		transition: max-height .2s ease-out
 		&_active
 			border-bottom: 1px solid $border
-	&__buttons
-		padding: 20px
-		display: flex
-		justify-content: space-between
-	&__reset
-			color: $blue
-			border: none
-			outline: 0
-			padding: 0
-			margin-left: 10px
-			background-color: $block
-			font-size: 12px
-			text-transform: uppercase
-			cursor: pointer
-			letter-spacing: .5px
-			transition: color .15s
-			&:hover
-				color: $olive
-			&:active, &:focus
-				outline: none
+		&_last
+			border-bottom: none
 
 .accordion
 	width: 100%
@@ -110,6 +126,7 @@ aside
 	padding: 16px 0 17px 19px
 	position: relative
 	cursor: pointer
+	transition: border-color .4s ease-out
 	&__title
 		color: $main
 		font-weight: 500
@@ -120,7 +137,10 @@ aside
 		top: 22px
 		right: 19px
 		background: url(~assets/icons/arrow.svg) left top / 10px 7px no-repeat
+	&_last
+		border-bottom-color: $block
 	&_active
+		border-bottom: 1px solid $border
 		.accordion__arrow
 			transform: rotate(180deg)
 </style>

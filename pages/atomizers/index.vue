@@ -88,12 +88,8 @@ export default {
 		}
 	},
   mounted() {
-    accordionStart();
 		rangeStart();
-	},
-	beforeDestroy() {
-		this.$bus.$off('showHiddenFilter')
-  }
+	}
 };
 </script>
 

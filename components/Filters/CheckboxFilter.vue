@@ -1,5 +1,5 @@
 <template>
-  <div class="filter__wrapper">
+  <div class="filter__wrapper filter__wrapper_active">
     <div class="checkboxes" :class="directionClass">
       <label class="checkboxes__label" v-for="value in values" :key="value">
         {{ value }}

@@ -1,5 +1,5 @@
 <template>
-  <div class="filter__wrapper">
+  <div class="filter__wrapper filter__wrapper_active">
     <div class="range">
       <div class="range__inputs">
         <div class="range__from">
