@@ -23,11 +23,6 @@ body
 	transition: all .15s
 	&:active, &:focus
 		outline: none
-	&_apply
-		width: 141px
-		background-color: $blue
-		&:hover
-			background-color: $olive
 	&_more
 		width: 121px
 		border: 2px solid $olive
@@ -51,4 +46,11 @@ body
 		background-color: $block
 		color: $blue
 		letter-spacing: .8px
+
+// animation between routes
+.fade-enter-active, .fade-leave-active
+	transition: opacity .3s
+
+.fade-enter, .fade-leave-to
+	opacity: 0
 		

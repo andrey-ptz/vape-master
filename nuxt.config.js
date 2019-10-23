@@ -19,7 +19,12 @@ export default {
 			{ src: "/js/nouislider.min.js", body: true },
 			{ src: "/js/polyfills.js", body: true }
 		]
-  },
+	},
+	// page animation
+	transition: {
+		name: 'fade',
+		mode: 'out-in'
+	},
   /*
   ** Customize the progress-bar color
   */
