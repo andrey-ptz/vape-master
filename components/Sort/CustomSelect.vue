@@ -54,6 +54,9 @@ export default {
     optionClick(index) {
 			this.indexActiveOption = index;
 			this.valueActiveOption = this.optionsList[index].name;
+			this.$router.push({ 
+				query: { ...this.$route.query, 'orderBy': this.optionsList[index].value } 
+			});
     }
   }
 };

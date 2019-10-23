@@ -80,6 +80,9 @@ export default {
 		changeValues() {
 			const arrValues = [this.minVal, this.maxVal];
 			this.$refs.slider.noUiSlider.set(arrValues);
+			this.$router.push({ 
+				query: { ...this.$route.query, [this.filterName]: arrValues.join('-') } 
+			});
     }
 	},
 };

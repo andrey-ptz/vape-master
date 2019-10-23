@@ -44,7 +44,12 @@ export default {
 	},
 	methods: {
     filterValues() {
-
+			let arr;
+			this.checkboxValues.length 
+				? arr = this.checkboxValues.sort().join('-').toLowerCase() 
+				: arr = []
+			
+			this.$router.push({ query: { ...this.$route.query, [this.filterName]: arr } });
 		}
 	},
 	filters: {
