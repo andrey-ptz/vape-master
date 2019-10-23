@@ -17,7 +17,11 @@
 				<div class="main-container">
 					<div class="sort">
 						<div class="search">
-							<input class="search__input" type="search" placeholder="Быстрый поиск" />
+							<input class="search__input" 
+								type="search" 
+								placeholder="Быстрый поиск"
+								v-model="searchValue"
+							/>
 						</div>
 						<CustomSelect :pageName="pageName" />
 					</div>
@@ -60,6 +64,7 @@ export default {
 	},
 	data() {
     return {
+			searchValue: '',
 			pageName: 'atomizers',
 			hiddenFilter: false,
 			defaultSize: 6,
@@ -87,6 +92,14 @@ export default {
 			this.currentSize += this.loadMoreSize
 		}
 	},
+	watch: {
+    searchValue() {
+      this.$store.dispatch('updateSearchValue', {
+				searchValue: this.searchValue.trim(),
+				name: this.pageName
+			})
+    }
+  },
   mounted() {
 
 	},

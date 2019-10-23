@@ -1,5 +1,6 @@
 export default () => ({
 	itemList: [],
+	searchValue: '',
 	defaultSort: 'brand',
 	activeSort: 'brand',
 	sortParams: [

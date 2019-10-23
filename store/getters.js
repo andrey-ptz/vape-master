@@ -33,7 +33,18 @@ export default {
 		// which matches filter parameters from store
 		return name => {
 			let tempState = state[name].itemList,
-					filteredState;
+					filteredState,
+					search = state[name].searchValue;
+
+			if (search) {
+				search = search.trim().toLowerCase();
+				filteredState = tempState.filter(item => {
+					if (`${item.brand} ${item.name}`.toLowerCase().indexOf(search) !== -1) {
+						return item
+					}
+				})
+				tempState = filteredState
+			}
 
 			state[name].filterParams.forEach((p) => {
 				if (p.activeValues.length) {

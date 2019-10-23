@@ -9,5 +9,8 @@ export default {
 			: commit('sortItems', { orderBy: pageState.defaultSort, name: payload.name })
 
 			commit('filterValues', payload)
+	},
+	updateSearchValue({ commit }, payload) {
+		commit('updateSearchValue', payload)
 	}
 }

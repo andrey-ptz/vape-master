@@ -57,6 +57,9 @@ export default {
 		state[name].itemList = sortBySomething(state[name].itemList, orderBy)
 		state[name].activeSort = orderBy
 	},
+	updateSearchValue(state, payload) {
+		state[payload.name].searchValue = payload.searchValue
+	},
 	// get URL query params, process them and set to store
 	filterValues(state, payload) {
 		const query = payload.query, name = payload.name;
