@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <img class="card__image" 
-			:src="`img/${card.img}`" 
+			:src="`img/${pageName}/${card.img}`" 
 			:alt="`${card.brand} ${card.name}`"
 		/>
     <div class="card__content">
@@ -48,7 +48,7 @@ export default {
       for (key in this.itemParams) {
 				
 				switch (key) {
-          case 'original':
+          case 'original': case 'charge':
 						this.card[key] ? value = "Да" : value = "Нет"
 						break;
 					case 'airflow':
