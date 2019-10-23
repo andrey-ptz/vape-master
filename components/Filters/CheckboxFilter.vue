@@ -2,8 +2,14 @@
   <div class="filter__wrapper filter__wrapper_active">
     <div class="checkboxes" :class="directionClass">
       <label class="checkboxes__label" v-for="value in values" :key="value">
-        {{ value }}
-        <input type="checkbox" class="checkboxes__input" />
+        {{ value | replaceBoolean }}
+        <input 
+					type="checkbox" 
+					class="checkboxes__input" 
+					v-model="checkboxValues"
+          @change="filterValues"
+          :value="value"
+				/>
         <span class="checkboxes__checkmark"></span>
       </label>
     </div>
@@ -13,10 +19,18 @@
 <script>
 export default {
 	props: {
+		filterName: {
+      type: String,
+      required: true
+    },
 		values: {
 			type: Array,
 			required: true
 		},
+		activeValues: {
+      type: Array,
+      required: true
+    },
 		direction: {
 			type: String,
 			required: true
@@ -24,7 +38,18 @@ export default {
 	},
 	data() {
 		return {
-			directionClass: 'checkboxes_' + this.direction
+			directionClass: 'checkboxes_' + this.direction,
+			checkboxValues: this.activeValues
+		}
+	},
+	methods: {
+    filterValues() {
+
+		}
+	},
+	filters: {
+    replaceBoolean(value) {
+      return value === true ? 'Да' : ( value === false ? 'Нет' : value )
 		}
 	}
 };
