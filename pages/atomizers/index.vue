@@ -89,6 +89,10 @@ export default {
 	},
   mounted() {
 
+	},
+	validate ({ params, query, store }) {
+		store.dispatch('filterValues', { query, name: 'atomizers' });
+		return true
 	}
 };
 </script>
