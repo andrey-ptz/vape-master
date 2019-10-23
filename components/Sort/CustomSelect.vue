@@ -3,17 +3,18 @@
     <label class="select__label">Сортировать</label>
     <div class="select__wrapper">
       <div class="select__custom" @click="optionsHide = !optionsHide">
-        {{ options.active }}
+        {{ valueActiveOption }}
         <div class="select__arrow" :class="{'select__arrow_active': optionsHide}"></div>
       </div>
-      <div class="select__options" :class="{'select__options_active': optionsHide}">
+      <div ref="options" class="select__options" 
+				:class="{'select__options_active': optionsHide}">
         <div
           class="select__option"
-          v-for="value in options.values"
-          :key="value"
-          :class="{'select__option_selected': value === options.active}"
-          @click="optionClick"
-        >{{ value }}</div>
+          v-for="(value, i) in optionsList"
+          :key="i"
+          :class="{'select__option_selected': i === indexActiveOption}"
+          @click="optionClick(i)"
+        >{{ value.name }}</div>
       </div>
     </div>
   </div>
@@ -21,16 +22,22 @@
 
 <script>
 export default {
+	props: {
+		pageName: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
-      optionsHide: false,
-      options: {
-        values: ["по названию", "по диаметру", "по цене"],
-        active: "по названию"
-      }
-    };
-  },
+			optionsHide: false,
+			optionsList: [],
+			indexActiveOption: 0,
+			valueActiveOption: ''
+    }
+	},
   mounted() {
+		this.loadOptions();
     this.$bus.$on("documentClick", e => {
       if (!e.target.matches(".select__custom")) {
         this.optionsHide = false;
@@ -38,13 +45,15 @@ export default {
     });
   },
   methods: {
-    optionClick(e) {
-			const options = document.querySelectorAll(".select__option");
-			for (let i = 0; i < options.length; i++) {
-				options[i].classList.remove("select__option_selected");
-			}
-      e.target.classList.add("select__option_selected");
-      this.options.active = e.target.innerHTML.trim();
+		loadOptions() {
+			const activeIndex = this.$store.getters.activeSortIndex(this.pageName);
+			this.optionsList = this.$store.getters.sortParams(this.pageName);
+			this.valueActiveOption = this.optionsList[activeIndex].name;
+			this.indexActiveOption = activeIndex;
+		},
+    optionClick(index) {
+			this.indexActiveOption = index;
+			this.valueActiveOption = this.optionsList[index].name;
     }
   }
 };
@@ -86,7 +95,6 @@ export default {
 		left: 0
 		overflow: hidden
 		width: 100%
-		height: 80px
 		border: 1px solid $border
 		border-radius: 4px
 		background-color: $block

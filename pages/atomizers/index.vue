@@ -19,7 +19,7 @@
 						<div class="search">
 							<input class="search__input" type="search" placeholder="Быстрый поиск" />
 						</div>
-						<CustomSelect />
+						<CustomSelect :pageName="pageName" />
 					</div>
 					<main>
 						<Card 
