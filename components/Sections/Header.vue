@@ -11,7 +11,7 @@
 			<div class="user">
 				<div class="user__info">
 					<a class="user__link" href="#">
-						<img class="user__img" src="img/user.jpg" alt="Константин Константинов">
+						<img class="user__img" src="/img/user.jpg" alt="Константин Константинов">
 					</a>
 					<div class="user__username">
 						<div class="user__name">Константин</div>

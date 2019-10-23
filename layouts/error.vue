@@ -1,10 +1,13 @@
 <template>
   <div>
     <Header />
-		<div class="wrapper">
-			<div class="move" ref="move"></div>
-		</div>
-		<div style="height: calc(100vh + 100px)"></div>
+    <div class="wrapper">
+      <div class="move" ref="move"></div>
+      <div class="headline">
+        <h1>Страница ошибки 404 (в разработке)</h1>
+      </div>
+    </div>
+    <div style="height: calc(100vh + 100px)"></div>
   </div>
 </template>
 
@@ -15,6 +18,14 @@ export default {
   components: {
     Header
 	},
+	head() {
+     return {
+      title: 'Ошибка 404',
+      meta: [
+        { hid: "description", name: "description", content: 'Ошибка 404' }
+      ]
+    };
+  },
 	methods: {
 		documentClick(e) {
 			this.$bus.$emit('documentClick', e)

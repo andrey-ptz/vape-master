@@ -8,7 +8,7 @@
       <h2 class="card__title">{{ `${card.brand} ${card.name}` }}</h2>
       <table class="card__table">
         <tbody>
-          <tr v-for="param in cardParams" :key="param.name">
+          <tr v-for="param in ruParams" :key="param.name">
             <td>{{ param.name }}</td>
             <td>{{ param.value }}</td>
           </tr>
@@ -16,7 +16,7 @@
       </table>
     </div>
     <div class="card__footer">
-      <a href="#" class="btn btn_more">Подробнее</a>
+      <nuxt-link :to="link" class="btn btn_more">Подробнее</nuxt-link>
       <div class="card__price">{{ card.price.toLocaleString('ru') }} руб.</div>
     </div>
   </div>
@@ -35,12 +35,15 @@ export default {
     }
   },
   computed: {
+		link() {
+			return `/${this.pageName}/${this.card.id}`
+		},
 		// call getter with page name param and get card parameters
 		itemParams() {
 			return this.$store.getters.itemParams(this.pageName);
 		},
 		// change some default card parameters
-    cardParams() {
+    ruParams() {
 			let key, value, cardParams = [];
       for (key in this.itemParams) {
 				
