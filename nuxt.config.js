@@ -20,8 +20,8 @@ export default {
 			{ src: "/js/polyfills.js", body: true }
 		]
 	},
-	// page animation
-	transition: {
+	// animation between routes
+	pageTransition: {
 		name: 'fade',
 		mode: 'out-in'
 	},

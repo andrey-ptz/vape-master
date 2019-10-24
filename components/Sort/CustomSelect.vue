@@ -38,34 +38,40 @@ export default {
 	},
   mounted() {
 		this.loadOptions();
-
+		
+		// close custom select if clicked not on it
     this.$bus.$on("documentClick", e => {
       if (!e.target.matches(".select__custom")) {
         this.optionsHide = false;
       }
 		});
 
+		// add a listener for the clearPage event
 		this.$bus.$on('clearPage', () => {
 			this.indexActiveOption = 0;
 			this.valueActiveOption = this.optionsList[0].name
 		});
   },
   methods: {
+		// set custom select values using parameters from the store
 		loadOptions() {
 			const activeIndex = this.$store.getters.activeSortIndex(this.pageName);
 			this.optionsList = this.$store.getters.sortParams(this.pageName);
 			this.valueActiveOption = this.optionsList[activeIndex].name;
 			this.indexActiveOption = activeIndex;
 		},
+		
     optionClick(index) {
 			this.indexActiveOption = index;
 			this.valueActiveOption = this.optionsList[index].name;
+			// add current orderBy key to URL
 			this.$router.push({ 
 				query: { ...this.$route.query, 'orderBy': this.optionsList[index].value } 
 			});
     }
 	},
 	beforeDestroy() {
+		// destroy the listener
     this.$bus.$off("clearPage");
   }
 };

@@ -7,18 +7,22 @@
 <script>
 export default {
   methods: {
+		// create event, when click on document
     documentClick(e) {
       this.$bus.$emit("documentClick", e);
-    },
+		},
+		// create event, when resize window
     windowResize() {
       this.$bus.$emit("windowResize");
     }
   },
   mounted() {
+		// add listeners
     document.addEventListener("click", this.documentClick);
     window.addEventListener("resize", this.windowResize);
   },
   beforeDestroy() {
+		// destroy listeners
     document.removeEventListener("click", this.documentClick);
     window.removeEventListener("resize", this.windowResize);
   }

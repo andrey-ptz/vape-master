@@ -56,6 +56,7 @@ export default {
 		}
 	},
 	methods:{
+		// when click hamburger icon
 		mobileMenu() {
 			this.hamburgerActive = !this.hamburgerActive
 			const list = this.$refs.list, 
@@ -68,21 +69,26 @@ export default {
 				move.style.height = list.scrollHeight + "px";
 			}
 		},
+		// create clearPage event, when click on current page link
 		clearPage() {
 			this.$bus.$emit('clearPage')
 		}
 	},
 	computed: {
+		// slice array of links for hidden links block
 		hiddenLinks() {
 			return this.links.slice(3);
 		}
 	},
 	mounted() {
+		// close hidden links block if clicked not on it
 		this.$bus.$on('documentClick', (e) => {
 			if (!e.target.matches('.nav__item-hidden')) {
 				this.hiddenMenu = false
 			}
 		}),
+
+		// add a listener for the windowResize event
 		this.$bus.$on('windowResize', () => {
 			if (window.matchMedia("(min-width: 769px)").matches) {
 				this.hamburgerActive = false;
@@ -93,6 +99,7 @@ export default {
 		})
 	},
 	beforeDestroy() {
+		// destroy listeners
 		this.$bus.$off('documentClick')
 		this.$bus.$off('windowResize')
 	}

@@ -55,17 +55,20 @@ export default {
 		}
 	},
 	mounted() {
+		// add a listener for the clearPage event
 		this.$bus.$on('clearPage', () => {
 			this.minVal = this.values[0];
 			this.maxVal = this.values[1];
 			this.$refs.slider.noUiSlider.set([this.minVal, this.maxVal]);
 		})
 
+		// when values from store are not empty
 		if (this.activeValues.length) {
 			this.minVal = this.activeValues[0];
 			this.maxVal = this.activeValues[1];
 		}
 
+		// create an instance of the noUiSlider
     noUiSlider.create(this.$refs.slider, {
       start: [this.minVal, this.maxVal],
       connect: true,
@@ -75,6 +78,7 @@ export default {
       }
 		});
 
+		// change input value when drag slider
 		this.$refs.slider.noUiSlider.on('update', (values) => {
 			this.minVal = parseInt(values[0]);
 			this.maxVal = parseInt(values[1]);
@@ -83,6 +87,7 @@ export default {
 		this.$refs.slider.noUiSlider.on('change', this.changeValues)
 	},
 	methods: {
+		// add or remove parameters from filter to URL
 		changeValues() {
 			const arrValues = [this.minVal, this.maxVal];
 			this.$refs.slider.noUiSlider.set(arrValues);
@@ -92,6 +97,7 @@ export default {
     }
 	},
 	beforeDestroy() {
+		// destroy the listener
     this.$bus.$off("clearPage");
   }
 };

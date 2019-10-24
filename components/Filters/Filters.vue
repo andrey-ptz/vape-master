@@ -52,12 +52,14 @@ export default {
     }
   },
   mounted() {
+		// if resolution <= 900px show filter when filter button click
     this.$bus.$on("showHiddenFilter", status => {
       status
         ? this.$refs.aside.classList.add("active")
         : this.$refs.aside.classList.remove("active");
     });
 
+		// set styles for every accordion element
     let asideDisplay = getComputedStyle(this.$refs.aside).display;
     document.querySelectorAll(".accordion").forEach((el, i, arr) => {
       if (el.classList.contains("accordion_active") && asideDisplay != "none") {
@@ -69,6 +71,7 @@ export default {
   },
   methods: {
     accordion(e) {
+			// open or close accordion element
       e.currentTarget.classList.toggle("accordion_active");
       const panel = e.currentTarget.nextElementSibling;
       if (parseInt(panel.style.maxHeight) !== 0) {
@@ -81,6 +84,7 @@ export default {
     }
   },
   beforeDestroy() {
+		// destroy the listener
     this.$bus.$off("showHiddenFilter");
   }
 };

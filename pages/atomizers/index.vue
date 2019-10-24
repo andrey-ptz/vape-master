@@ -91,6 +91,7 @@ export default {
 		}
 	},
 	methods: {
+		// if resolution <= 900px show filter when filter button click
 		showHiddenFilter() {
 			this.hiddenFilter = !this.hiddenFilter
 			this.$bus.$emit('showHiddenFilter', this.hiddenFilter)
@@ -101,6 +102,7 @@ export default {
 		}
 	},
 	watch: {
+		// call every time, when search field change
     searchValue() {
       this.$store.dispatch('updateSearchValue', {
 				searchValue: this.searchValue.trim(),
@@ -109,16 +111,19 @@ export default {
     }
   },
   mounted() {
+		// add a listener for the clearPage event
 		this.$bus.$on('clearPage', () => {
 			this.currentSize = this.defaultSize;
 			this.searchValue = '';
 		})
 	},
+	// call every time, when URL change
 	validate ({ params, query, store }) {
 		store.dispatch('filterValues', { query, name: 'atomizers' });
 		return true
 	},
 	beforeDestroy() {
+		// destroy the listener
     this.$bus.$off("clearPage");
   }
 };

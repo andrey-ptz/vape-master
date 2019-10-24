@@ -1,4 +1,4 @@
-// get data from db and set data to store when app is initializing
+// get data from db and set it to store when app is initializing
 export const actions = {
 	async nuxtServerInit({ commit }) {
 		let itemList = [];

@@ -31,6 +31,7 @@ export default {
 	itemList(state) {
 		// get page name and return card list
 		// which matches filter parameters from store
+		// and matches search field
 		return name => {
 			let tempState = state[name].itemList,
 					filteredState,

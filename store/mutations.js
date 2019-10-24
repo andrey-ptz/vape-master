@@ -57,6 +57,7 @@ export default {
 		state[name].itemList = sortBySomething(state[name].itemList, orderBy)
 		state[name].activeSort = orderBy
 	},
+	// update search value parameter in store
 	updateSearchValue(state, payload) {
 		state[payload.name].searchValue = payload.searchValue
 	},

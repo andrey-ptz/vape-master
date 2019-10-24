@@ -43,6 +43,7 @@ export default {
 		}
 	},
 	methods: {
+		// add or remove parameters from filter to URL
     filterValues() {
 			let arr;
 			this.checkboxValues.length 
@@ -53,16 +54,19 @@ export default {
 		}
 	},
 	mounted() {
+		// add a listener for the clearPage event
 		this.$bus.$on('clearPage', () => {
 			this.checkboxValues = [];
 		})
 	},
 	filters: {
+		// replaces some values
     replaceBoolean(value) {
       return value === true ? 'Да' : ( value === false ? 'Нет' : value )
 		}
 	},
 	beforeDestroy() {
+		// destroy the listener
     this.$bus.$off("clearPage");
   }
 };

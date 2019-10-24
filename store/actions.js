@@ -1,5 +1,5 @@
 export default {
-	// get query from URL, get page name and call mutations
+	// get (query from URL, page name) and call mutations:
 	// for sort state by orderBy param
 	// for set filter params to store
 	filterValues({ commit, state }, payload) {
