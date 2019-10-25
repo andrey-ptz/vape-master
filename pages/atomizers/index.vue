@@ -35,10 +35,10 @@
 							/>
 						</transition-group>
 					</main>
-					<transition>
+					<transition name="btn_load">
 						<button 
 							class="btn btn_load" 
-							v-if="itemList.length > currentSize"
+							v-show="itemList.length > currentSize"
 							@click="loadMore"
 						>
 							Показать еще
