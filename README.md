@@ -1,6 +1,10 @@
-# vape-master
+# Vape Master
 
-> Vape and accessories online store
+> Online store with dynamic filtering and sorting items, powered by [Nuxt.js](https://nuxtjs.org/).
+
+## Demo
+
+View a demo [here](http://vape.myfirst.website/atomizers).
 
 ## Build Setup
 
@@ -18,5 +22,3 @@ $ npm run start
 # generate static project
 $ npm run generate
 ```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
