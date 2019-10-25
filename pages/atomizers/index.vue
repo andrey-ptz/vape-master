@@ -26,20 +26,24 @@
 						<CustomSelect :pageName="pageName" />
 					</div>
 					<main>
-						<Card 
-							v-for="(value, i) in items" 
-							:key="i"
-							:card="value"
-							:pageName="pageName"
-						/>
+						<transition-group name="card" tag="ul" class="card-list">
+							<Card 
+								v-for="value in items" 
+								:key="value.name"
+								:card="value"
+								:pageName="pageName"
+							/>
+						</transition-group>
 					</main>
-					<button 
-						class="btn btn_load" 
-						v-if="itemList.length > currentSize"
-						@click="loadMore"
-					>
-						Показать еще
-					</button>
+					<transition>
+						<button 
+							class="btn btn_load" 
+							v-if="itemList.length > currentSize"
+							@click="loadMore"
+						>
+							Показать еще
+						</button>
+					</transition>
 				</div>
 				<Footer />
 			</div>

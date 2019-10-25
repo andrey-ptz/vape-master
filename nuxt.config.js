@@ -10,10 +10,11 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+			{ hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+			{ hid: 'og:image', name: 'og:image', content: '/img/og.png' }
     ],
     link: [
-      { rel: 'icon', type: 'image/png', sizes: '32x32', href: 'favicon-32x32.png' }
+      { rel: 'icon', type: 'image/png', sizes: '32x32', href: '../favicon-32x32.png' }
 		],
 		script: [
 			{ src: "/js/nouislider.min.js", body: true },

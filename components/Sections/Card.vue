@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <li class="card">
     <img class="card__image" 
 			:src="`img/${pageName}/${card.img}`" 
 			:alt="`${card.brand} ${card.name}`"
@@ -19,7 +19,7 @@
       <nuxt-link :to="link" class="btn btn_more">Подробнее</nuxt-link>
       <div class="card__price">{{ card.price.toLocaleString('ru') }} руб.</div>
     </div>
-  </div>
+  </li>
 </template>
 
 <script>
@@ -91,6 +91,16 @@ export default {
 	box-shadow: $shadow
 	border-radius: 4px
 	overflow: hidden
+	&-move
+		transition: all 400ms ease-in-out 50ms
+	&-enter-active
+		transition: all 300ms ease-out
+	&-leave-active
+		position: absolute
+		z-index: 0
+		opacity: 0
+	&-enter
+		transform: scale(0.9)
 	&__image
 		width: 100%
 		flex-shrink: 0

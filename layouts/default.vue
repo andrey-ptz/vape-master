@@ -111,7 +111,9 @@ export default {
 		&::-webkit-search-cancel-button
 			display: none
 
-main
+.card-list
 	margin-top: 20px
+	margin-bottom: 0
+	padding: 0
 	+row-flex()
 </style>
